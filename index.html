@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>鲁游搭子 · 作品体验页</title>
+<meta name="description" content="鲁游搭子：面向山东大学生的预算约束型行程规划小程序。扫码体验 / 观看演示 / 下载工程包。">
+
+<!-- 分享到微信时的卡片信息：把 og:image 换成你的封面图（建议 500x400） -->
+<meta property="og:title" content="鲁游搭子 · 赛道三作品体验页">
+<meta property="og:description" content="预算卡死也能玩，一分钟生成可执行行程。">
+<meta property="og:image" content="./cover.png">
+
+<style>
+  :root {
+    --blue: #1B6B93;
+    --blue-deep: #12455F;
+    --orange: #E8833A;
+    --paper: #F7F5F0;
+    --ink: #1A1A1A;
+    --muted: #8A8A8A;
+    --line: #E8E4DC;
+    --card: #FFFFFF;
+    --t1: #3A3A3A;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --blue: #3D8FBB;
+      --blue-deep: #6FB4D6;
+      --orange: #F09A5A;
+      --paper: #121417;
+      --ink: #ECECEA;
+      --muted: #9A9A95;
+      --line: #2A2D31;
+      --card: #1C1F24;
+      --t1: #CFCFCA;
+    }
+    .card { box-shadow: none; }
+    .shot { background: #262A2F !important; }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.65;
+    font-size: 15px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 18px 72px; }
+
+  /* ——— 头图 ——— */
+  header {
+    background: linear-gradient(155deg, var(--blue-deep), var(--blue));
+    color: #fff;
+    padding: 46px 22px 34px;
+    border-radius: 0 0 26px 26px;
+    margin: 0 -18px 22px;
+  }
+  header .h1 { font-size: 27px; font-weight: 700; letter-spacing: .5px; margin: 0 0 8px; }
+  header .sub { font-size: 14px; opacity: .9; margin: 0; }
+  .tags { margin-top: 15px; display: flex; gap: 7px; flex-wrap: wrap; }
+  .tag {
+    font-size: 12px; padding: 3px 11px; border-radius: 20px;
+    background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.26);
+  }
+  .hero-cta { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .hero-cta a {
+    text-decoration: none; font-size: 14px; font-weight: 600;
+    padding: 10px 18px; border-radius: 22px;
+    background: #fff; color: var(--blue-deep);
+  }
+  .hero-cta a.ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.55); }
+
+  /* ——— 卡片 ——— */
+  .card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 20px 20px 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 3px 14px rgba(0,0,0,.045);
+  }
+  .card h2 {
+    font-size: 16px; margin: 0 0 12px;
+    display: flex; align-items: center; gap: 9px;
+  }
+  .no {
+    flex: none; width: 22px; height: 22px; border-radius: 50%;
+    background: var(--blue); color: #fff; font-size: 12px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .card p { margin: 0 0 10px; color: var(--t1); font-size: 14px; }
+  .card p:last-child { margin-bottom: 0; }
+  .muted { color: var(--muted); font-size: 12.5px; }
+
+  /* ——— 二维码 ——— */
+  .qr-box { text-align: center; }
+  .qr-box img {
+    width: 196px; height: 196px; object-fit: contain;
+    border: 1px solid var(--line); border-radius: 12px; background: #fff; padding: 6px;
+  }
+  .qr-empty {
+    width: 196px; height: 196px; margin: 0 auto;
+    border: 2px dashed var(--line); border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12.5px; color: var(--muted); text-align: center; padding: 16px;
+  }
+  .qr-hint { margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--blue-deep); }
+  .qr-note { margin-top: 6px; font-size: 12px; color: var(--muted); }
+
+  /* ——— 视频 16:9 ——— */
+  .video-wrap {
+    position: relative; width: 100%; padding-top: 56.25%;
+    background: #000; border-radius: 12px; overflow: hidden;
+  }
+  .video-wrap iframe {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+  }
+
+  /* ——— 截图墙 ——— */
+  .shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .shot {
+    aspect-ratio: 9 / 16; background: #EFECE5; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: var(--muted); text-align: center; padding: 6px;
+    overflow: hidden;
+  }
+  .shot img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 420px) { .shots { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ——— 按钮 ——— */
+  .btn {
+    display: block; text-align: center; text-decoration: none;
+    background: var(--orange); color: #fff; font-weight: 600;
+    padding: 13px; border-radius: 24px; font-size: 15px; margin-top: 12px;
+  }
+  .btn.ghost { background: transparent; color: var(--blue); border: 1px dashed rgba(27,107,147,.5); }
+
+  /* ——— 表格 ——— */
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th, td { text-align: left; padding: 8px 4px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 12.5px; }
+  td.k { white-space: nowrap; color: var(--muted); }
+
+  /* ——— 功能宫格 ——— */
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .feat { border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  .feat b { display: block; font-size: 13.5px; margin-bottom: 4px; }
+  .feat span { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  @media (max-width: 420px) { .grid { grid-template-columns: 1fr; } }
+
+  /* ——— 分工说明 ——— */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .split > div { border-radius: 12px; padding: 12px; border: 1px solid var(--line); }
+  .split h3 { margin: 0 0 6px; font-size: 13.5px; }
+  .split ul { margin: 0; padding-left: 16px; font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+  @media (max-width: 420px) { .split { grid-template-columns: 1fr; } }
+
+  footer { text-align: center; font-size: 12px; color: var(--muted); padding: 22px 8px 0; }
+  .top {
+    position: fixed; right: 16px; bottom: 20px;
+    background: var(--blue); color: #fff; font-size: 12px;
+    padding: 9px 14px; border-radius: 20px; text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0,0,0,.18);
+  }
+
+  /* 打印（评审可能打印一份） */
+  @media print {
+    .top, .hero-cta, .btn, footer .no-print { display: none; }
+    body { background: #fff; }
+    .card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="h1">鲁游搭子</div>
+    <p class="sub">给山东大学生的「预算约束型」行程规划小程序</p>
+    <div class="tags">
+      <span class="tag">赛道三 · AI 传播工具创新</span>
+      <span class="tag">微信小程序</span>
+      <span class="tag">覆盖山东 16 市</span>
+      <span class="tag" id="tag-team">学校 · 团队</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#qr">立即体验</a>
+      <a class="ghost" href="#video">看演示</a>
+    </div>
+  </header>
+
+  <!-- 它解决什么问题 -->
+  <div class="card">
+    <h2><span class="no">1</span>它解决什么问题</h2>
+    <p>
+      大学生被文旅内容“种草”后，往往无法把心动变成可执行的行程——查攻略、排路线、比价格要花两三个小时，
+      最后常常放弃出行或超支返程。鲁游搭子把这个过程压到<strong>一分钟</strong>：
+      把目的地的营销信息（景点、美食、老字号、避坑）转化为<strong>按预算可执行的行程</strong>，
+      完成从“种草”到“出行”的最后一公里。
+    </p>
+    <table>
+      <tr><th>指标</th><th>传统方式</th><th>本工具</th></tr>
+      <tr><td class="k">规划耗时</td><td>2~3 小时</td><td><strong>1 分钟</strong></td></tr>
+      <tr><td class="k">预算超支</td><td>常见</td><td><strong>0 超支（硬约束）</strong></td></tr>
+      <tr><td class="k">信息可信度</td><td>攻略时效不明、无价格</td><td>票价人工核验 + 来源标注</td></tr>
+      <tr><td class="k">传播侧</td><td>攻略看完即走</td><td>战报一键分享，反哺二次传播</td></tr>
+    </table>
+  </div>
+
+  <!-- 扫码体验 -->
+  <div class="card" id="qr">
+    <h2><span class="no">2</span>扫码体验（推荐）</h2>
+    <div class="qr-box">
+      <div id="qr-slot"></div>
+      <div class="qr-hint">微信「长按识别」或「扫一扫」打开</div>
+      <div class="qr-note" id="qr-note">
+        体验版需先加入体验成员；如需体验请点<a href="#contact">联系方式</a>告知微信号。
+      </div>
+    </div>
+  </div>
+
+  <!-- 演示视频 -->
+  <div class="card" id="video">
+    <h2><span class="no">3</span>完整运行演示（3 分钟）</h2>
+    <div class="video-wrap" id="video-slot"></div>
+    <a class="btn ghost" id="video-link" href="#" target="_blank" rel="noopener">在 B 站打开 →</a>
+    <p class="muted" style="margin-top:10px">演示路径：填条件 → 生成行程 → 看行程与花费 → 行中救急 → 战报分享</p>
+  </div>
+
+  <!-- 运行截图 -->
+  <div class="card">
+    <h2><span class="no">4</span>界面截图</h2>
+    <div class="shots" id="shots"></div>
+    <p class="muted" style="margin-top:10px">左起：首页条件填写 / 行程时间轴 / 钱花在哪了 / 数据看板</p>
+  </div>
+
+  <!-- 核心功能 -->
+  <div class="card">
+    <h2><span class="no">5</span>核心功能</h2>
+    <div class="grid">
+      <div class="feat"><b>预算硬约束</b><span>总价永不超过输入预算；装不下时如实报差额并给建议。</span></div>
+      <div class="feat"><b>避坑 + 体力条</b><span>16 城避坑提示；体力耗尽主动提示减点。</span></div>
+      <div class="feat"><b>行中救急</b><span>下雨/太热/太累一键换室内点，就近找补给与公厕。</span></div>
+      <div class="feat"><b>本地内容</b><span>16 城美食、27 家老字号、学生票与预约标签。</span></div>
+      <div class="feat"><b>可编辑可撤销</b><span>换交通、删点、上下移、选房型，改完即时重算。</span></div>
+      <div class="feat"><b>战报传播</b><span>出行结束生成海报，一键分享形成二次传播。</span></div>
+    </div>
+  </div>
+
+  <!-- AI 与人工 -->
+  <div class="card">
+    <h2><span class="no">6</span>AI 用在哪，人管什么</h2>
+    <div class="split">
+      <div>
+        <h3>AI 负责</h3>
+        <ul>
+          <li>DeepSeek-V3 生成 60–80 字行程点评</li>
+          <li>提示词 v1→v3 迭代留痕</li>
+          <li>生成内容均标“AI 生成”</li>
+        </ul>
+      </div>
+      <div>
+        <h3>人工 / 算法负责</h3>
+        <ul>
+          <li>钱与路线由确定性引擎计算，<strong>LLM 不参与金额</strong></li>
+          <li>票价/学生票/预约 157 条人工核验</li>
+          <li>不确定信息标注“以现场为准”</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 材料下载 -->
+  <div class="card">
+    <h2><span class="no">7</span>材料下载</h2>
+    <p>工程包（可本地运行）、简要说明、数据来源说明、运行案例记录、提示词迭代记录：</p>
+    <a class="btn" id="pan-link" href="#">网盘下载</a>
+    <p class="muted" id="pan-note" style="margin-top:10px">
+      工程包运行方式：微信开发者工具 → 导入项目 → 编译，无需配置任何密钥。
+    </p>
+  </div>
+
+  <!-- 数据与合规 -->
+  <div class="card">
+    <h2><span class="no">8</span>数据来源与合规</h2>
+    <table>
+      <tr><td class="k">地点/评分/开放时间</td><td>高德开放平台（2026-11 抓取）</td></tr>
+      <tr><td class="k">景区等级</td><td>百度地图开放平台</td></tr>
+      <tr><td class="k">票价/学生票/预约</td><td>人工核验 157 条，界面标注“以现场为准”</td></tr>
+      <tr><td class="k">住宿/餐饮</td><td>档位估算，界面均已标注</td></tr>
+      <tr><td class="k">AI 文案</td><td>DeepSeek-V3 生成，带“AI 生成”角标</td></tr>
+    </table>
+    <p class="muted" style="margin-top:10px">
+      演示版为预生成数据；正式版将部署服务端实时求解。本作品为参赛用途，未接入任何在线交易与票务预订。
+    </p>
+  </div>
+
+  <!-- 联系方式 -->
+  <div class="card" id="contact">
+    <h2><span class="no">9</span>联系与体验成员</h2>
+    <p>
+      如需体验版（需加入体验成员，上限 15 人）或材料补充，请通过提交表留的联系方式联系我们，
+      或回复附件的邮件。我们会在收到后添加体验成员并回执。
+    </p>
+    <p class="muted" id="contact-line">学校：____　团队：____　联系人：____　邮箱：____</p>
+  </div>
+
+  <footer>
+    <div>赛道三 · AI 传播工具创新　｜　鲁游搭子　｜　2026-11</div>
+    <div class="no-print" style="margin-top:6px">本页为静态展示页，材料细节见工程包 <code>docs/</code></div>
+  </footer>
+
+</div>
+
+<a class="top" href="#">↑ 顶部</a>
+
+<script>
+/* ============================================================
+   只需改这一处配置，页面所有占位会自动替换
+   ============================================================ */
+const CONFIG = {
+  school: '潍坊职业学院',
+  team: '嘉然说的都队',
+  project: '鲁游搭子',
+
+  // 体验版二维码图片（放同目录，如 qr.png）
+  qrSrc: './qr.png',
+  // 二维码无法打开时的说明（留空用默认）
+  qrNote: '',
+
+  // B 站视频：填 BV 号即可自动生成播放器和链接
+  bvid: 'BV1k7yXz2Ek2',
+
+  // 材料网盘
+  panUrl: 'https://pan.baidu.com/s/1UclGu51KMeXs26ck2jgo7Q',
+  panCode: '6bp9',
+
+  // 截图：把图片放同目录，按顺序填文件名（最多 4 张）
+  screenshots: ['shot1.png', 'shot2.png', 'shot3.png', 'shot4.png'],
+
+  // 联系方式
+  contact: '联系人：杨镇霖　邮箱：3173376803@qq.com'
+};
+/* ============================================================ */
+
+// 团队标签
+document.getElementById('tag-team').textContent = CONFIG.school + ' · ' + CONFIG.team;
+
+// 二维码：加载失败时显示占位框而不是破图
+(function () {
+  const slot = document.getElementById('qr-slot');
+  const img = new Image();
+  img.alt = CONFIG.project + ' 体验版二维码';
+  img.onload = () => slot.appendChild(img);
+  img.onerror = () => {
+    const d = document.createElement('div');
+    d.className = 'qr-empty';
+    d.textContent = '把体验版二维码存为 qr.png 放在本页同目录';
+    slot.appendChild(d);
+  };
+  img.src = CONFIG.qrSrc;
+  if (CONFIG.qrNote) document.getElementById('qr-note').innerHTML = CONFIG.qrNote;
+})();
+
+// 视频
+(function () {
+  const bvid = CONFIG.bvid;
+  const slot = document.getElementById('video-slot');
+  if (bvid && bvid !== 'BV1xxxxxxxxx') {
+    const f = document.createElement('iframe');
+    f.src = 'https://player.bilibili.com/player.html?bvid=' + bvid + '&page=1&high_quality=1&danmaku=0';
+    f.allowFullscreen = true;
+    f.setAttribute('scrolling', 'no');
+    slot.appendChild(f);
+    const link = document.getElementById('video-link');
+    link.href = 'https://www.bilibili.com/video/' + bvid;
+  } else {
+    slot.innerHTML = '<div style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;color:#888;font-size:13px">把 B 站视频 BV 号填进 CONFIG.bvid</div>';
+    document.getElementById('video-link').style.display = 'none';
+  }
+})();
+
+// 截图墙
+(function () {
+  const box = document.getElementById('shots');
+  const labels = ['首页', '行程', '花费明细', '数据看板'];
+  CONFIG.screenshots.forEach((src, i) => {
+    const d = document.createElement('div');
+    d.className = 'shot';
+    const img = new Image();
+    img.onload = () => { d.innerHTML = ''; d.appendChild(img); };
+    img.onerror = () => { d.textContent = labels[i] || ('截图 ' + (i + 1)); };
+    img.src = src;
+    box.appendChild(d);
+  });
+})();
+
+// 材料下载：优先网盘；没配网盘就用同目录里的工程包 zip 兜底
+(function () {
+  const a = document.getElementById('pan-link');
+  if (CONFIG.panUrl) {
+    a.href = CONFIG.panUrl;
+    a.textContent = CONFIG.panCode ? ('网盘下载（提取码 ' + CONFIG.panCode + '）') : '网盘下载';
+    return;
+  }
+  // 兜底：直接下载同目录的工程包
+  a.href = './工程包-鲁游搭子-源码.zip';
+  a.textContent = '下载工程包（源码 ZIP）';
+  a.setAttribute('download', '');
+})();
+
+// 联系方式
+document.getElementById('contact-line').textContent =
+  '学校：' + CONFIG.school + '　团队：' + CONFIG.team + '　' + CONFIG.contact;
+</script>
+</body>
+</html>
